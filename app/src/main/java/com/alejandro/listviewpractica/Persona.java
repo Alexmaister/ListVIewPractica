@@ -1,12 +1,14 @@
 package com.alejandro.listviewpractica;
 
+import java.io.Serializable;
+
 /**
  * Created by Alejandro on 16/10/2017.
  */
 
-public class Persona {
+public class Persona implements Serializable{
 
-
+    static final long SerialVersionUID=1l;
     private String nombre;
     private String apellidos;
     private int edad;

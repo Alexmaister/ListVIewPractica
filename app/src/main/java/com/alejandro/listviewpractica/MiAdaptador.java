@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+
 /**
  * Created by Alejandro on 16/10/2017.
  */
@@ -48,15 +50,7 @@ public class MiAdaptador extends BaseAdapter{
         nombre.setText(p.getNombre());
         apellidos.setText(p.getApellidos());
         edad.setText(String.valueOf(p.getEdad()));
-
-       if(array[position].getEdad()<18)
-            ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(((ImageView) view.findViewById(R.id.imagen)).getResources().getDrawable(R.drawable.nino));
-        else if(array[position].getEdad()<30)
-            ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(((ImageView) view.findViewById(R.id.imagen)).getResources().getDrawable(R.drawable.adolescente));
-        else if(array[position].getEdad()<60)
-            ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(((ImageView) view.findViewById(R.id.imagen)).getResources().getDrawable(R.drawable.adulto));
-        else
-            ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(((ImageView) view.findViewById(R.id.imagen)).getResources().getDrawable(R.drawable.anciano));
+        ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(view.getResources().getDrawable(ControladorPersona.obtenerImagen(array[position])));
 
         return view;
     }

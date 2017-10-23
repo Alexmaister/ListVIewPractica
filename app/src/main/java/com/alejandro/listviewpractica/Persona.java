@@ -1,14 +1,17 @@
 package com.alejandro.listviewpractica;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by Alejandro on 16/10/2017.
  */
 
-public class Persona implements Serializable{
+public class Persona implements  Parcelable {
 
-    static final long SerialVersionUID=1l;
+
     private String nombre;
     private String apellidos;
     private int edad;
@@ -51,4 +54,33 @@ public class Persona implements Serializable{
         this.edad = edad;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.nombre);
+        dest.writeString(this.apellidos);
+        dest.writeInt(this.edad);
+    }
+
+    protected Persona(Parcel in) {
+        this.nombre = in.readString();
+        this.apellidos = in.readString();
+        this.edad = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Persona> CREATOR = new Parcelable.Creator<Persona>() {
+        @Override
+        public Persona createFromParcel(Parcel source) {
+            return new Persona(source);
+        }
+
+        @Override
+        public Persona[] newArray(int size) {
+            return new Persona[size];
+        }
+    };
 }

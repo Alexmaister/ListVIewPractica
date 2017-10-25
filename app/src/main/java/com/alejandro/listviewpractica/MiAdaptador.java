@@ -44,22 +44,31 @@ public class MiAdaptador extends BaseAdapter{
         LayoutInflater inflater=actividad.getLayoutInflater();
         //adjuntamos el recurso vista_persona, null(a nadie ya que la lista va a pantalla completa, true(indica si el recurso que se adjuntara al viewGroup debe adjuntar todas sus vistas , en este caso si))
         //utilizamos la vista reciclada
+        ContactoHolder holder;
         View view= convertView;
         if(view==null) {
+
             switch (getItemViewType(position)){
                 case 0: view = inflater.inflate(R.layout.vista_persona, parent, false);
                     break;
                 case 1:view = inflater.inflate(R.layout.vista_persona_mayor, parent, false);
             }
+            holder=new ContactoHolder(view);
+        }else{
 
-        }
-            ((TextView) view.findViewById(R.id.nombre)).setText(p.getNombre());
-            ((TextView) view.findViewById(R.id.apellidos)).setText(p.getApellidos());
-            ((TextView) view.findViewById(R.id.edad)).setText(String.valueOf(p.getEdad()));
-            if(p.imagen==null)
-                ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(view.getResources().getDrawable(ControladorPersona.obtenerImagen(array[position])));
-            else
-                ((ImageView) view.findViewById(R.id.imagen)).setImageURI(array[position].imagen);
+                holder=(ContactoHolder) view.getTag();
+            }
+
+
+            holder.setNombre(p.getNombre());
+            holder.setApellidos(p.getApellidos());
+            holder.setEdad(p.getEdad());
+            holder.setImg(ControladorPersona.obtenerImagen(p));
+
+
+
+        view.setTag(holder);
+
         return view;
     }
 

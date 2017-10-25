@@ -37,9 +37,9 @@ public class ContactoActivity extends Activity {
     }
 
     public void hacerFoto(View vista){
-        Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
-        Uri foto=Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"img_"+(System.currentTimeMillis()/1000)+".jpg"));
-        i.putExtra(MediaStore.EXTRA_OUTPUT,CODIGO_FOTO);
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Uri foto=Uri.fromFile(new File(Environment.DIRECTORY_PICTURES+File.separator+"img_"+(System.currentTimeMillis()/1000)+".jpg"));
+        i.putExtra(MediaStore.EXTRA_OUTPUT,foto);
         startActivityForResult(i,CODIGO_FOTO);
         ControladorPersona.ponerFoto(foto,contacto);
 

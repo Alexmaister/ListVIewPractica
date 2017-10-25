@@ -1,5 +1,6 @@
 package com.alejandro.listviewpractica;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,29 +10,50 @@ import android.widget.TextView;
 
 public class ContactoHolder {
 
-    private ImageView img;
-    private TextView txt;
 
-    public ContactoHolder(ImageView img, TextView txt) {
-        this.img = img;
-        this.txt = txt;
+
+    private ImageView img;
+    private TextView nombre;
+    private TextView apellidos;
+    private TextView edad;
+
+    public ContactoHolder(View v) {
+        this.img        =       (ImageView) v.findViewById(R.id.imagen);
+        this.nombre     =       (TextView) v.findViewById(R.id.nombre);
+        this.apellidos  =       (TextView) v.findViewById(R.id.apellidos);
+        this.edad       =       (TextView) v.findViewById(R.id.edad);
     }
 
     public ImageView getImg() {
         return img;
     }
 
-    public void setImg(ImageView img) {
-        this.img = img;
+    public void setImg(int img) {
+        this.img.setImageResource(img);
     }
 
-    public TextView getTxt() {
-        return txt;
+    public TextView getNombre() {
+        return nombre;
     }
 
-    public void setTxt(TextView txt) {
-        this.txt = txt;
+    public void setNombre(String nombre) {
+        this.nombre.setText(nombre);
     }
 
+    public TextView getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos.setText(apellidos);
+    }
+
+    public TextView getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad.setText(String.valueOf(edad));
+    }
 
 }

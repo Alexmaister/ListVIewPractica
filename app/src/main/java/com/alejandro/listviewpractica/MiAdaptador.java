@@ -43,15 +43,33 @@ public class MiAdaptador extends BaseAdapter{
         Persona p=array[position];
         LayoutInflater inflater=actividad.getLayoutInflater();
         //adjuntamos el recurso vista_persona, null(a nadie ya que la lista va a pantalla completa, true(indica si el recurso que se adjuntara al viewGroup debe adjuntar todas sus vistas , en este caso si))
-        View view= inflater.inflate(R.layout.vista_persona,null,true);
-        TextView nombre=(TextView) view.findViewById(R.id.nombre);
-        TextView apellidos=(TextView) view.findViewById(R.id.apellidos);
-        TextView edad=(TextView) view.findViewById(R.id.edad);
-        nombre.setText(p.getNombre());
-        apellidos.setText(p.getApellidos());
-        edad.setText(String.valueOf(p.getEdad()));
-        ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(view.getResources().getDrawable(ControladorPersona.obtenerImagen(array[position])));
+        //utilizamos la vista reciclada
+        View view= convertView;
+        if(view==null) {
+            switch (getItemViewType(position)){
+                case 0: view = inflater.inflate(R.layout.vista_persona, parent, false);
+                    break;
+                case 1:view = inflater.inflate(R.layout.vista_persona_mayor, parent, false);
+            }
 
+        }
+            ((TextView) view.findViewById(R.id.nombre)).setText(p.getNombre());
+            ((TextView) view.findViewById(R.id.apellidos)).setText(p.getApellidos());
+            ((TextView) view.findViewById(R.id.edad)).setText(String.valueOf(p.getEdad()));
+            if(p.imagen==null)
+                ((ImageView) view.findViewById(R.id.imagen)).setImageDrawable(view.getResources().getDrawable(ControladorPersona.obtenerImagen(array[position])));
+            else
+                ((ImageView) view.findViewById(R.id.imagen)).setImageURI(array[position].imagen);
         return view;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return ControladorPersona.obtenerTipo(array[position]);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
     }
 }

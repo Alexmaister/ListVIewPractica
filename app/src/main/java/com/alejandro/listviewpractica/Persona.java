@@ -1,5 +1,6 @@
 package com.alejandro.listviewpractica;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +16,7 @@ public class Persona implements  Parcelable {
     private String nombre;
     private String apellidos;
     private int edad;
+    public Uri imagen=null;
 
 
 

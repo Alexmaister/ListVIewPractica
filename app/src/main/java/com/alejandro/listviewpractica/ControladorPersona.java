@@ -1,5 +1,6 @@
 package com.alejandro.listviewpractica;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 /**
@@ -37,16 +38,11 @@ public class ControladorPersona {
 
         return resource;
     }
-    public static void establecerURI(Uri uri, Persona p){
+    public static void establecerFoto(Bitmap img, Persona p){
 
-        p.imagen=uri;
+        p.imagen=img;
     }
-    public static void ponerFoto(Uri foto,Persona p){
-        if(foto instanceof Uri && foto!=null){
-            establecerURI(foto,p);
 
 
-        }
-    }
 
 }
